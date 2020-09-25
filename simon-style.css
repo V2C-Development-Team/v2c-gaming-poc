@@ -1,0 +1,123 @@
+/* General Styling */
+:root {
+    --panel-size: 250px;
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+  }
+
+.body {
+    margin: 0;
+}
+
+.center {
+    text-align: center;
+  }
+
+  .underline {
+    text-decoration: underline;
+}
+
+/* Menu Syling */
+.menu-header {
+    font-size: 75px;
+    margin: 25px;
+    color: black;
+    text-decoration: underline;
+  }
+  
+  .menu-container {
+    height: 600px;
+    position: relative;
+  }
+  
+  .link-btn {
+    font: 50px Arial;
+    text-decoration: none;
+    background-color: gray;
+    color: black;
+    padding: 2px 6px 2px 6px;
+    border: 2px solid black;
+    border-radius: 10px;
+  }
+
+/* Simon Board Styling */
+.board-container {
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+}
+
+.quadrant {
+    width: var(--panel-size);
+    height: var(--panel-size);
+    display: inline-block;
+    cursor: pointer;
+}
+
+.TR-quadrant {
+    border-top-right-radius: 700px;
+    background-color: red;
+}
+
+.TR-quadrant:hover {
+    background-color: rgba(255, 0, 0, 0.5)
+}
+
+.TL-quadrant {
+    border-top-left-radius: 700px;
+    background-color: green;
+}
+
+.TL-quadrant:hover {
+    background-color: rgba(34, 150, 59, 0.5)
+}
+
+.BL-quadrant {
+    border-bottom-left-radius: 700px;
+    background-color: yellow;
+}
+
+.BL-quadrant:hover {
+    background-color: rgba(232, 247, 103, 0.5)
+}
+
+.BR-quadrant {
+    border-bottom-right-radius: 700px;
+    background-color: blue;
+}
+
+.BR-quadrant:hover {
+    background-color: rgba(70, 150, 204, 0.5)
+}
+
+.dot {
+    height: 250px;
+    width: 250px;
+    background-color: black;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    bottom: 381px;
+}
+
+.simon-logo {
+    color: white;
+    font-size: 75px;
+    position:relative;
+    bottom: 605px;
+}
+
+.simon-game-exit-btn {
+    font: 30px Arial;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 2px 6px 2px 6px;
+    border: 2px solid black;
+    border-radius: 10px;
+    position: relative;
+    bottom: 420px;
+}
