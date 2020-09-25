@@ -44,10 +44,15 @@
 
 /* Simon Board Styling */
 .board-container {
-    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    /*width: 100vw;
     height: 100vh;
     justify-content: center;
-    align-content: center;
+    align-content: center;*/
 }
 
 .quadrant {
@@ -120,4 +125,50 @@
     border-radius: 10px;
     position: relative;
     bottom: 420px;
+}
+
+/* Game Messages */
+
+.win-msg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(71, 255, 71);
+    font-size: 75px;
+}
+
+.gameover-msg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(145, 45, 38);
+    font-size: 75px;
+}
+
+.end-screen-btn {
+    background-color: black;
+    color: white;
+    font-size: 30px;
+}
+
+.win-msg.show {
+    display: flex;
+}
+
+.gameover-msg.show {
+    display: flex;
 }
