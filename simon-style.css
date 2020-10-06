@@ -71,12 +71,22 @@
     background-color: rgba(255, 0, 0, 0.5)
 }
 
+.TR-highlight {
+    border-top-right-radius: 700px;
+    background-color: rgba(255, 0, 0, 0.5)
+}
+
 .TL-quadrant {
     border-top-left-radius: 700px;
     background-color: green;
 }
 
 .TL-quadrant:hover {
+    background-color: rgba(34, 150, 59, 0.5)
+}
+
+.TL-highlight {
+    border-top-left-radius: 700px;
     background-color: rgba(34, 150, 59, 0.5)
 }
 
@@ -89,12 +99,22 @@
     background-color: rgba(232, 247, 103, 0.5)
 }
 
+.BL-highlight {
+    border-bottom-left-radius: 700px;
+    background-color: rgba(232, 247, 103, 0.5)
+}
+
 .BR-quadrant {
     border-bottom-right-radius: 700px;
     background-color: blue;
 }
 
 .BR-quadrant:hover {
+    background-color: rgba(70, 150, 204, 0.5)
+}
+
+.BR-highlight {
+    border-bottom-right-radius: 700px;
     background-color: rgba(70, 150, 204, 0.5)
 }
 
