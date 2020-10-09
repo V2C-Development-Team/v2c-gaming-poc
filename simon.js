@@ -7,32 +7,34 @@ const highlightTime = 750
 const timeBetweenHighlights = 500
 
 const main = async () => {
-    try {
-        console.log('no board')
-        game = new simonBoard()
-        game.iterateLevel()
-        console.log('level was iterated')
+    return new Promise((resolve, reject) => {
+        try {
+            console.log('no board')
+            game = new simonBoard()
+            game.iterateLevel()
+            console.log('level was iterated')
 
-        topRight.onclick = async () => {
-            await game.quadrantClicked(topRight)
-            game.iterateLevel()
-        }
-        topLeft.onclick = async () => {
-            await game.quadrantClicked(topLeft)
-            game.iterateLevel()
-        }
-        botRight.onclick = async () => {
-            await game.quadrantClicked(botRight)
-            game.iterateLevel()
-        }
-        botLeft.onclick = async () => {
-            await game.quadrantClicked(botLeft)
-            game.iterateLevel()
-        }
+            topRight.onclick = async () => {
+                await game.quadrantClicked(topRight)
+                game.iterateLevel()
+            }
+            topLeft.onclick = async () => {
+                await game.quadrantClicked(topLeft)
+                game.iterateLevel()
+            }
+            botRight.onclick = async () => {
+                await game.quadrantClicked(botRight)
+                game.iterateLevel()
+            }
+            botLeft.onclick = async () => {
+                await game.quadrantClicked(botLeft)
+                game.iterateLevel()
+            }
 
-    } catch (err) {
-        console.log('Error: ' + err)
-    }
+        } catch (err) {
+            console.log('Error: ' + err)
+        }
+    })
 }
 
 // Start Game Button

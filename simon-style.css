@@ -48,11 +48,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    /*width: 100vw;
-    height: 100vh;
-    justify-content: center;
-    align-content: center;*/
 }
 
 .quadrant {
@@ -62,18 +57,24 @@
     cursor: pointer;
 }
 
+
 .TR-quadrant {
     border-top-right-radius: 700px;
     background-color: red;
 }
 
 .TR-quadrant:hover {
-    background-color: rgba(255, 0, 0, 0.5)
+    box-shadow: 0 0 6pt 6pt black
 }
 
 .TR-highlight {
     border-top-right-radius: 700px;
     background-color: rgba(255, 0, 0, 0.5)
+}
+
+.TR-click {
+    border-top-right-radius: 700px;
+    background-color: rgba(255, 255, 255, 0.5)
 }
 
 .TL-quadrant {
@@ -82,7 +83,7 @@
 }
 
 .TL-quadrant:hover {
-    background-color: rgba(34, 150, 59, 0.5)
+    box-shadow: 0 0 6pt 6pt black
 }
 
 .TL-highlight {
@@ -96,7 +97,7 @@
 }
 
 .BL-quadrant:hover {
-    background-color: rgba(232, 247, 103, 0.5)
+    box-shadow: 0 0 6pt 6pt black
 }
 
 .BL-highlight {
@@ -110,7 +111,7 @@
 }
 
 .BR-quadrant:hover {
-    background-color: rgba(70, 150, 204, 0.5)
+    box-shadow: 0 0 6pt 6pt black
 }
 
 .BR-highlight {
