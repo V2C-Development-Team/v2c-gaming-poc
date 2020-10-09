@@ -8,7 +8,7 @@ easyDiff.onclick = () => {
     hardDiff.classList.remove('selectedDiff')
 }
 
-moderateDiff.onclick = () => {
+    moderateDiff.onclick = () => {
     easyDiff.classList.remove('selectedDiff')
     moderateDiff.className = moderateDiff.className += ' selectedDiff'
     hardDiff.classList.remove('selectedDiff')

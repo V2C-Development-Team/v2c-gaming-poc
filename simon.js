@@ -10,27 +10,28 @@ const main = async () => {
     return new Promise((resolve, reject) => {
         try {
             chooseDifficulty()
-
-            console.log('no board')
+            // console.log('highlightTime = ' + highlightTime)
+            // console.log('timeBetween = ' + timeBetweenHighlights)
             game = new simonBoard()
             game.iterateLevel()
-            console.log('level was iterated')
 
-            topRight.onclick = async () => {
-                await game.quadrantClicked(topRight)
-                game.iterateLevel()
-            }
-            topLeft.onclick = async () => {
-                await game.quadrantClicked(topLeft)
-                game.iterateLevel()
-            }
-            botRight.onclick = async () => {
-                await game.quadrantClicked(botRight)
-                game.iterateLevel()
-            }
-            botLeft.onclick = async () => {
-                await game.quadrantClicked(botLeft)
-                game.iterateLevel()
+            if (!game.canClick) {
+                topRight.onclick = async () => {
+                    await game.quadrantClicked(topRight)
+                    game.iterateLevel()
+                }
+                topLeft.onclick = async () => {
+                    await game.quadrantClicked(topLeft)
+                    game.iterateLevel()
+                }
+                botRight.onclick = async () => {
+                    await game.quadrantClicked(botRight)
+                    game.iterateLevel()
+                }
+                botLeft.onclick = async () => {
+                    await game.quadrantClicked(botLeft)
+                    game.iterateLevel()
+                }
             }
 
         } catch (err) {
@@ -39,13 +40,14 @@ const main = async () => {
     })
 }
 
+// Currently not working - need to implement persistent memory
 const chooseDifficulty = () => {
     const difficulty = document.querySelector('selectedDiff')
 
-    if (difficulty == document.getElementById('easy-diff')) {
+    if (difficulty === document.getElementById('easy-diff')) {
         highlightTime = 1000
         timeBetweenHighlights = 250 
-    } else if (difficulty == document.getElementById('moderate-diff')) {
+    } else if (difficulty === document.getElementById('moderate-diff')) {
         highlightTime = 500
         timeBetweenHighlights = 100 
     } else {
@@ -56,16 +58,8 @@ const chooseDifficulty = () => {
 
 // Start Game Button
 const startGameBtn = document.getElementById('startGameBtn')
-
 startGameBtn.onclick = () => {
     main()
-}
-
-// Exit Game Button
-const exitBtn = document.getElementById('simonExitBtn')
-
-exitBtn.onclick = () => {
-    
 }
 
 class simonBoard {
@@ -76,12 +70,12 @@ class simonBoard {
         this.canClick = false
     }
 
+    // increases the sequence length and updates level title
     async iterateLevel() {
         try {
             this.userSequenceGuess = []
             this.seqLength++
             document.getElementById("levelHeader").innerHTML = "Level " + this.seqLength
-            console.log('seq length in itlvl = ' + this.seqLength)
             this.addToSequence()
             for (const quadrant of this.currentSequence) {
                 await this.highlightQuadrant(quadrant)
@@ -92,6 +86,7 @@ class simonBoard {
         }
     }
 
+    // adds a random quadrant to the color sequence
     addToSequence() {
         let randomQuadrant = null
         let randNum = Math.floor(Math.random() * numOfQuadrants) + 1 // generate num 1 to numOfQuadrants
@@ -115,10 +110,12 @@ class simonBoard {
         this.currentSequence.push(randomQuadrant)
     }
 
-    // highlights quadrants from the list colorSeq
+    // highlights the input quadrant
      highlightQuadrant(quadrant) {
         return new Promise((resolve, reject) => {
             try {
+                this.canClick = false
+
                 if (quadrant === topLeft) {
                     console.log('TL!!!')
                     quadrant.className = quadrant.className += ' TL-highlight'
