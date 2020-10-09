@@ -3,12 +3,14 @@ const botLeft = document.getElementById('botLeft')
 const topRight = document.getElementById('topRight')
 const botRight = document.getElementById('botRight')
 const topLeft = document.getElementById('topLeft')
-const highlightTime = 750
-const timeBetweenHighlights = 500
+let highlightTime = 0
+let timeBetweenHighlights = 0
 
 const main = async () => {
     return new Promise((resolve, reject) => {
         try {
+            chooseDifficulty()
+
             console.log('no board')
             game = new simonBoard()
             game.iterateLevel()
@@ -35,6 +37,21 @@ const main = async () => {
             console.log('Error: ' + err)
         }
     })
+}
+
+const chooseDifficulty = () => {
+    const difficulty = document.querySelector('selectedDiff')
+
+    if (difficulty == document.getElementById('easy-diff')) {
+        highlightTime = 1000
+        timeBetweenHighlights = 250 
+    } else if (difficulty == document.getElementById('moderate-diff')) {
+        highlightTime = 500
+        timeBetweenHighlights = 100 
+    } else {
+        highlightTime = 250
+        timeBetweenHighlights = 0 
+    }
 }
 
 // Start Game Button
