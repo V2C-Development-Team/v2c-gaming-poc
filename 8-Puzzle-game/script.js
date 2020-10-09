@@ -81,6 +81,7 @@ class State {
     this.time = time;
     this.status = status;
     this.pause = pause;
+    
   }
 
   static ready() {
@@ -93,7 +94,7 @@ class State {
   }
 
   static start() {
-    return new State(getRandomGrid(), 0, 0, "playing");
+    return new State(getRandomGrid(), 0, 0, "playing",this.pause);
   }
 }
 
@@ -101,6 +102,7 @@ class Game {
   constructor(state) {
     this.state = state;
     this.tickId = null;
+    this.pause = false;
     this.tick = this.tick.bind(this);
     this.render();
     this.handleClickBox = this.handleClickBox.bind(this);
@@ -111,9 +113,13 @@ class Game {
   }
 
   tick() {
+    if (this.pause != true)
     this.setState({ time: this.state.time + 1 });
   }
 
+  pause() {
+    this.render();
+  }
   setState(newState) {
     this.state = { ...this.state, ...newState };
     this.render();
@@ -133,12 +139,14 @@ class Game {
           this.setState({
             status: "won",
             grid: newGrid,
-            move: this.state.move + 1
+            move: this.state.move + 1,
+            pause: this.pause
           });
         } else {
           this.setState({
             grid: newGrid,
-            move: this.state.move + 1
+            move: this.state.move + 1,
+            pause: this.pause
           });
         }
       }
@@ -170,12 +178,13 @@ class Game {
     if (status === "ready") newButton.textContent = "Play";
     if (status === "playing") newButton.textContent = "Reset";
     if (status === "won") newButton.textContent = "Play";
+    
     newButton.addEventListener("click", () => {
       clearInterval(this.tickId);
       this.tickId = setInterval(this.tick, 1000);
       this.setState(State.start());
     });
-    document.querySelector(".footer button").replaceWith(newButton);
+    document.querySelector('#playButtonSpan button').replaceWith(newButton);
 
     // Render move
     document.getElementById("move").textContent = `Move: ${move}`;
@@ -189,6 +198,32 @@ class Game {
     } else {
       document.querySelector(".message").textContent = "";
     }
+
+   // pause buton 
+   
+   const newButton1 = document.createElement("button");
+    if (status === "ready") {
+      newButton1.textContent = "Pause";
+      newButton1.disabled = true;
+    }
+    if (status === "playing") {
+      newButton1.textContent = "Pause";
+    newButton1.disabled = false;
+  }
+  if (status === "Pause") {
+    newButton1.textContent = "Play";
+  newButton1.disabled = true;
+}
+    if (status === "won") {newButton1.textContent = "Pause";
+    newButton1.disabled = true;
+  }
+    
+    newButton1.addEventListener("click", () => {
+      this.pause = !this.pause;
+      console.log('pause vlue: ', this.pause);
+    });
+    document.querySelector('#pauseButtonSpan button').replaceWith(newButton1);
+
   }
 }
 

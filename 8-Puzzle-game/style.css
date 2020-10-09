@@ -71,10 +71,11 @@ body {
   color: #D4EE9F;
   font-weight: bold;
   margin: auto 0;
+  padding: 5px;
 }
 
 .message {
-  color:#1eff00;
+  color:#AA3939;
   height: 80px;
 }
 
