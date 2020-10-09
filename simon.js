@@ -18,6 +18,12 @@ const main = async () => {
             await game.highlightQuadrant(quadrant)
         }
         console.log('highlighted')
+        game.canClick = true
+
+        topRight.onclick = () => {game.quadrantClicked(topRight)}
+        topLeft.onclick = () => {game.quadrantClicked(topLeft)}
+        botRight.onclick = () => {game.quadrantClicked(botRight)}
+        botLeft.onclick = () => {game.quadrantClicked(botLeft)}
 
     } catch (err) {
         console.log('Error: ' + err)
@@ -44,6 +50,7 @@ class simonBoard {
         this.seqLength = 5
         this.currentSequence = []
         this.userSequenceGuess = []
+        this.canClick = false
     }
 
     addToSequence() {
@@ -109,6 +116,16 @@ class simonBoard {
         }
         })
     }
+
+    quadrantClicked(quadrant) {
+        if (!this.canClick) {
+            return
+        } else {
+            console.log(quadrant)
+        }
+    }
+
+
 }
 
 
