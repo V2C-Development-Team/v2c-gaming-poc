@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simon</title>
+    <link rel='stylesheet' href='../simon-style.css' />
+    <script src="../simon.js" defer></script>
+  </head>
+  <body>
+    <div class="board-container">
+        <h1 class="center underline" id="levelHeader">Level 1</h1>
+        <div class="center">
+            <div class="quadrant TL-quadrant" id="topLeft"></div>
+            <div class="quadrant TR-quadrant" id="topRight"></div>
+        </div> 
+        <div class="center">
+            <div class="quadrant BL-quadrant" id="botLeft"></div>
+            <div class="quadrant BR-quadrant" id="botRight"></div>
+        </div>
+        <div class="center">
+            <span class="dot"></span>
+            <br>
+            <h1 class="simon-logo">Simon</h1>
+            <br>
+            <button class="simon-game-btn" id="startGameBtn">Start Game</button>
+            <a href="./simonMenu.html" class="simon-game-btn" id="simonExitBtn">Exit Game</a>
+        </div>
+    </div>
+    <div class="win-msg" id = win-msg-id>
+      <div winning-text>You Win!</div>
+      <button class="end-screen-btn" id="nextLevelBtn">Next Level</button>
+      <a href="simonMenu.html" class="end-screen-btn" id="exitLevelBtn">Exit Game</a>
+    </div>
+
+    <div class="gameover-msg" id = gameover-msg-id>
+      <div losing-text>You Lose!</div>
+      <a href="simon.html" class="end-screen-btn" id="startOverBtn">Start New Game</a>
+      <a href="simonMenu.html" class="end-screen-btn" id="exitLevelBtn">Exit Game</a>
+    </div>
+  </body>
+</html>

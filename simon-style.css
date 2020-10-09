@@ -1,0 +1,196 @@
+/* General Styling */
+:root {
+    --panel-size: 250px;
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+  }
+
+.body {
+    margin: 0;
+}
+
+.center {
+    text-align: center;
+  }
+
+  .underline {
+    text-decoration: underline;
+}
+
+/* Menu Syling */
+.menu-header {
+    font-size: 75px;
+    margin: 25px;
+    color: black;
+    text-decoration: underline;
+  }
+  
+  .menu-container {
+    height: 600px;
+    position: relative;
+  }
+  
+  .link-btn {
+    font: 50px Arial;
+    text-decoration: none;
+    background-color: gray;
+    color: black;
+    padding: 2px 6px 2px 6px;
+    border: 2px solid black;
+    border-radius: 10px;
+  }
+
+/* Simon Board Styling */
+.board-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.quadrant {
+    width: var(--panel-size);
+    height: var(--panel-size);
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+.TR-quadrant {
+    border-top-right-radius: 700px;
+    background-color: red;
+}
+
+.TR-quadrant:hover {
+    box-shadow: 0 0 6pt 6pt black
+}
+
+.TR-highlight {
+    border-top-right-radius: 700px;
+    background-color: rgba(255, 0, 0, 0.5)
+}
+
+.TR-click {
+    border-top-right-radius: 700px;
+    background-color: rgba(255, 255, 255, 0.5)
+}
+
+.TL-quadrant {
+    border-top-left-radius: 700px;
+    background-color: green;
+}
+
+.TL-quadrant:hover {
+    box-shadow: 0 0 6pt 6pt black
+}
+
+.TL-highlight {
+    border-top-left-radius: 700px;
+    background-color: rgba(34, 150, 59, 0.5)
+}
+
+.BL-quadrant {
+    border-bottom-left-radius: 700px;
+    background-color: yellow;
+}
+
+.BL-quadrant:hover {
+    box-shadow: 0 0 6pt 6pt black
+}
+
+.BL-highlight {
+    border-bottom-left-radius: 700px;
+    background-color: rgba(232, 247, 103, 0.5)
+}
+
+.BR-quadrant {
+    border-bottom-right-radius: 700px;
+    background-color: blue;
+}
+
+.BR-quadrant:hover {
+    box-shadow: 0 0 6pt 6pt black
+}
+
+.BR-highlight {
+    border-bottom-right-radius: 700px;
+    background-color: rgba(70, 150, 204, 0.5)
+}
+
+.dot {
+    height: 250px;
+    width: 250px;
+    background-color: black;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    bottom: 381px;
+}
+
+.simon-logo {
+    color: white;
+    font-size: 75px;
+    position:relative;
+    bottom: 605px;
+}
+
+.simon-game-btn {
+    font: 30px Arial;
+    text-decoration: none;
+    background-color: black;
+    color: white;
+    padding: 2px 6px 2px 6px;
+    border: 2px solid black;
+    border-radius: 10px;
+    position: relative;
+    bottom: 420px;
+}
+
+/* Game Messages */
+
+.win-msg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(71, 255, 71);
+    font-size: 75px;
+}
+
+.gameover-msg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .9);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgb(145, 45, 38);
+    font-size: 75px;
+}
+
+.end-screen-btn {
+    background-color: black;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.win-msg.show {
+    display: flex;
+}
+
+.gameover-msg.show {
+    display: flex;
+}
