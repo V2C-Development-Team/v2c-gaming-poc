@@ -3,19 +3,13 @@ const moderateDiff = document.getElementById('moderate-diff')
 const hardDiff = document.getElementById('hard-diff')
 
 easyDiff.onclick = () => {
-    easyDiff.className = easyDiff.className += ' selectedDiff'
-    moderateDiff.classList.remove('selectedDiff')
-    hardDiff.classList.remove('selectedDiff')
+    localStorage.setItem('difficultyCookie', 'easy')
 }
 
-    moderateDiff.onclick = () => {
-    easyDiff.classList.remove('selectedDiff')
-    moderateDiff.className = moderateDiff.className += ' selectedDiff'
-    hardDiff.classList.remove('selectedDiff')
+moderateDiff.onclick = () => {
+    localStorage.setItem('difficultyCookie', 'moderate')
 }
 
 hardDiff.onclick = () => {
-    easyDiff.classList.remove('selectedDiff')
-    moderateDiff.classList.remove('selectedDiff')
-    hardDiff.className = hardDiff.className += ' selectedDiff'
+    localStorage.setItem('difficultyCookie', 'hard')
 }

@@ -40,19 +40,20 @@ const main = async () => {
     })
 }
 
-// Currently not working - need to implement persistent memory
+// Difficulty level set using localStorage
 const chooseDifficulty = () => {
-    const difficulty = document.querySelector('selectedDiff')
+    var difficulty = localStorage.getItem('difficultyCookie')
+    console.log('this is the diff: ' + difficulty)
 
-    if (difficulty === document.getElementById('easy-diff')) {
+    if (difficulty === 'easy') {
         highlightTime = 1000
         timeBetweenHighlights = 250 
-    } else if (difficulty === document.getElementById('moderate-diff')) {
+    } else if (difficulty === 'moderate') {
         highlightTime = 500
         timeBetweenHighlights = 100 
     } else {
         highlightTime = 250
-        timeBetweenHighlights = 0 
+        timeBetweenHighlights = 25 
     }
 }
 
