@@ -6,6 +6,7 @@
     <script src="../simon.js" defer></script>
   </head>
   <body>
+    <!-- Game Board -->
     <div class="board-container">
         <h1 class="center underline" id="levelHeader">Level 1</h1>
         <div class="center">
@@ -15,16 +16,28 @@
         <div class="center">
             <div class="quadrant BL-quadrant" id="botLeft"></div>
             <div class="quadrant BR-quadrant" id="botRight"></div>
-        </div>
-        <div class="center">
+            <br>
             <span class="dot"></span>
-            <br>
             <h1 class="simon-logo">Simon</h1>
-            <br>
-            <button class="simon-game-btn" id="startGameBtn">Start Game</button>
-            <a href="./simonMenu.html" class="simon-game-btn" id="simonExitBtn">Exit Game</a>
         </div>
     </div>
+     
+    <!-- Bottom Options -->
+    <div class="center">
+      <button class="simon-game-btn" id="startGameBtn">Start Game</button>
+      <a href="./simonMenu.html" class="simon-game-btn" id="simonExitBtn">Exit Game</a>
+      <p>
+        <label for="dfa-input">Simulated Voice Input</label>
+        <input type="text" id="dfa-input" size="50" />
+        <button id="dfa-submit">Send</button>
+      </p>
+      <p>
+        <label for="dfa-output-info">Additional Information</label>
+        <input type="text" id="dfa-output-info" disabled size="50" />
+      </p>
+    </div>
+
+    <!-- Win / Loss Screens -->
     <div class="win-msg" id = win-msg-id>
       <div winning-text>You Win!</div>
       <button class="end-screen-btn" id="nextLevelBtn">Next Level</button>

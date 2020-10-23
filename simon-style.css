@@ -46,8 +46,10 @@
 .board-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    height: 600px;
+    overflow: hidden;
 }
 
 .quadrant {
@@ -145,7 +147,6 @@
     border: 2px solid black;
     border-radius: 10px;
     position: relative;
-    bottom: 420px;
 }
 
 /* Game Messages */
