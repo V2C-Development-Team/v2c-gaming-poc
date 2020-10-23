@@ -1,7 +1,7 @@
 // Copyright 2020 Axonibyte Innovations, LLC
 
 function State(id) {
-  this.id = id;// id in schema
+  this.id = id;
   this.done = false;
   this.wipe = false;
   this.setEntry = null;
