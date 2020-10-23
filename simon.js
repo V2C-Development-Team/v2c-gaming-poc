@@ -63,12 +63,13 @@ class simonBoard {
         this.currentSequence = []
         this.userSequenceGuess = []
         this.canClick = false
-        this.gameStarted = false
+        this.levelOver = false
     }
 
     // increases the sequence length and updates level title
     async iterateLevel() {
         try {
+            this.levelOver = false
             this.userSequenceGuess = []
             this.seqLength++
             document.getElementById("levelHeader").innerHTML = "Level " + this.seqLength
@@ -76,7 +77,6 @@ class simonBoard {
             for (const quadrant of this.currentSequence) {
                 await this.highlightQuadrant(quadrant)
             }
-            this.gameStarted = true
             this.canClick = true
         } catch(err) {
             console.log('Error in iterateLevel function = ' + err)
@@ -162,6 +162,7 @@ class simonBoard {
                     let curIndex = this.userSequenceGuess.length - 1
                     if (this.userSequenceGuess[curIndex] === this.currentSequence[curIndex]) {
                         if(this.userSequenceGuess.length === this.seqLength) {
+                            this.levelOver = true
                             console.log('YOU WIN!!!!!!!')
                             document.getElementById('win-msg-id').className += " show"
                             document.getElementById('nextLevelBtn').onclick = () => {
@@ -173,7 +174,7 @@ class simonBoard {
                             }
                         }
                     } else {
-                        this.gameStarted = false
+                        this.levelOver = false
                         console.log('YOU LOSE!!!!!')
                         document.getElementById('gameover-msg-id').className += ' show'
                     }
@@ -185,8 +186,8 @@ class simonBoard {
         })
     }
 
-    isGameStarted() {
-        if(this.gameStarted) {
+    levelOver() {
+        if(this.levelOver) {
             return true
         } else {
             return false

@@ -9,6 +9,7 @@
 
 .body {
     margin: 0;
+    display: inline-block;
 }
 
 .center {
@@ -49,7 +50,6 @@
     justify-content: flex-start;
     align-items: center;
     height: 610px;
-    overflow: hidden;
 }
 
 .quadrant {
@@ -122,6 +122,7 @@
 }
 
 .dot {
+    font-size: medium;
     height: 250px;
     width: 250px;
     background-color: black;
@@ -197,4 +198,9 @@
 
 .gameover-msg.show {
     display: flex;
+}
+
+.text-input {
+    font-family: 'Times New Roman';
+    font-size: 14px;
 }
