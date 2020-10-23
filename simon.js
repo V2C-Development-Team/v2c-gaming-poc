@@ -10,27 +10,21 @@ const main = async () => {
     return new Promise((resolve, reject) => {
         try {
             chooseDifficulty()
-            // console.log('highlightTime = ' + highlightTime)
-            // console.log('timeBetween = ' + timeBetweenHighlights)
             game = new simonBoard()
             game.iterateLevel()
 
             if (!game.canClick) {
                 topRight.onclick = async () => {
                     await game.quadrantClicked(topRight)
-                    game.iterateLevel()
                 }
                 topLeft.onclick = async () => {
                     await game.quadrantClicked(topLeft)
-                    game.iterateLevel()
                 }
                 botRight.onclick = async () => {
                     await game.quadrantClicked(botRight)
-                    game.iterateLevel()
                 }
                 botLeft.onclick = async () => {
                     await game.quadrantClicked(botLeft)
-                    game.iterateLevel()
                 }
             }
 
@@ -69,6 +63,7 @@ class simonBoard {
         this.currentSequence = []
         this.userSequenceGuess = []
         this.canClick = false
+        this.gameStarted = false
     }
 
     // increases the sequence length and updates level title
@@ -188,6 +183,12 @@ class simonBoard {
         })
     }
 
-
+    isGameStarted() {
+        if(this.gameStarted) {
+            return true
+        } else {
+            return false
+        }
+    }
 
 }
