@@ -39,14 +39,14 @@
 
     <!-- Win / Loss Screens -->
     <div class="win-msg" id = win-msg-id>
-      <div winning-text>You Win!</div>
+      <div winning-text>Level Completed!</div>
       <button class="end-screen-btn" id="nextLevelBtn">Next Level</button>
       <a href="simonMenu.html" class="end-screen-btn" id="exitLevelBtn">Exit Game</a>
     </div>
 
     <div class="gameover-msg" id = gameover-msg-id>
-      <div losing-text>You Lose!</div>
-      <a href="simon.html" class="end-screen-btn" id="startOverBtn">Start New Game</a>
+      <div losing-text>Game Over</div>
+      <a href="simon.html" class="end-screen-btn" id="startOverBtn">New Game</a>
       <a href="simonMenu.html" class="end-screen-btn" id="exitLevelBtn">Exit Game</a>
     </div>
 
@@ -64,9 +64,11 @@
         "1": {
           "transitions": {
             "start": 2,
-            "difficulty": 3,
-            "back": 4,
-            "cancel": 0
+            "red": 3,
+            "green": 4,
+            "yellow": 5,
+            "blue": 6,
+            "exit": 7
           }
         },
         "2": {
@@ -80,14 +82,35 @@
           "state": "done",
           "set": {
             "key": "select",
-            "value": "difficulty"
+            "value": "red"
           }
         },
         "4": {
           "state": "done",
           "set": {
             "key": "select",
-            "value": "back"
+            "value": "green"
+          }
+        },
+        "5": {
+          "state": "done",
+          "set": {
+            "key": "select",
+            "value": "yellow"
+          }
+        },
+        "6": {
+          "state": "done",
+          "set": {
+            "key": "select",
+            "value": "blue"
+          }
+        },
+        "7": {
+          "state": "done",
+          "set": {
+            "key": "select",
+            "value": "exit"
           }
         }
       }
@@ -103,7 +126,7 @@
         $('#dfa-output-info').css('color', '#000000');
       }
 
-      function onTerminalState(register) {
+      async function onTerminalState(register) {
         console.log('!!! on terminal state !!!');
         for(const [key, value] of register.entries())
           console.log(`!!!!!!!!!! ${key} = ${value}`);
@@ -112,16 +135,25 @@
           console.error(`[OBSERVER] Could not pick out the select command.`);
         else {
           let select = register.get("select")
-
+          
           switch(select) {
             case "start":
-              location.href = 'simon.html'
+              main()
               break
-            case "difficulty":
-              location.href = 'simonDifficulty.html'
+            case "red":
+              await game.quadrantClicked(topRight)
               break
-            case "back":
-              location.href = 'gameDemoMenu.html'
+            case "green":
+              await game.quadrantClicked(topLeft)
+              break
+            case "yellow":
+              await game.quadrantClicked(botLeft)
+              break
+            case "blue":
+              await game.quadrantClicked(botRight)
+              break
+            case "exit":
+              location.href = 'simonMenu.html'
               break
             default:
               onError("Observer did not pick a valid command")

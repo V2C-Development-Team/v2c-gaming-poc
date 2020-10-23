@@ -76,6 +76,7 @@ class simonBoard {
             for (const quadrant of this.currentSequence) {
                 await this.highlightQuadrant(quadrant)
             }
+            this.gameStarted = true
             this.canClick = true
         } catch(err) {
             console.log('Error in iterateLevel function = ' + err)
@@ -172,6 +173,7 @@ class simonBoard {
                             }
                         }
                     } else {
+                        this.gameStarted = false
                         console.log('YOU LOSE!!!!!')
                         document.getElementById('gameover-msg-id').className += ' show'
                     }

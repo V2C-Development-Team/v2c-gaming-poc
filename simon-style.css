@@ -48,7 +48,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 600px;
+    height: 610px;
     overflow: hidden;
 }
 
@@ -185,7 +185,10 @@
     background-color: black;
     color: white;
     font-size: 30px;
+    border: 1px;
+    margin: 5px;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 .win-msg.show {
