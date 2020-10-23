@@ -74,7 +74,7 @@ const getRandomGrid = () => {
   return grid;
 };
 
-class State {
+class Box_State {
   constructor(grid, move, time, status, pause) {
     this.grid = grid;
     this.move = move;
@@ -85,7 +85,7 @@ class State {
   }
 
   static ready() {
-    return new State(
+    return new Box_State(
       [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]],
       0,
       0,
@@ -94,7 +94,7 @@ class State {
   }
 
   static start() {
-    return new State(getRandomGrid(), 0, 0, "playing",this.pause);
+    return new Box_State(getRandomGrid(), 0, 0, "playing",this.pause);
   }
 }
 
@@ -109,7 +109,7 @@ class Game {
   }
 
   static ready() {
-    return new Game(State.ready());
+    return new Game(Box_State.ready());
   }
 
   tick() {
@@ -127,6 +127,9 @@ class Game {
 
   handleClickBox(box) {
     return function() {
+    if (this.pause) {
+      return;
+    }
       const nextdoorBoxes = box.getNextdoorBoxes();
       const blankBox = nextdoorBoxes.find(
         nextdoorBox => this.state.grid[nextdoorBox.y][nextdoorBox.x] === 0
@@ -154,12 +157,15 @@ class Game {
   }
 
   render() {
-    const { grid, move, time, status, pause} = this.state;
 
+    const { grid, move, time, status, pause} = this.state;
+if(!this.pause){  
     // Render grid
     const newGrid = document.createElement("div");
     newGrid.className = "grid";
+
     for (let i = 0; i < 3; i++) {
+
       for (let j = 0; j < 3; j++) {
         const button = document.createElement("button");
 
@@ -171,6 +177,7 @@ class Game {
         newGrid.appendChild(button);
       }
     }
+
     document.querySelector(".grid").replaceWith(newGrid);
 
     // Render button
@@ -178,11 +185,12 @@ class Game {
     if (status === "ready") newButton.textContent = "Play";
     if (status === "playing") newButton.textContent = "Reset";
     if (status === "won") newButton.textContent = "Play";
-    
+   
     newButton.addEventListener("click", () => {
-      clearInterval(this.tickId);
-      this.tickId = setInterval(this.tick, 1000);
-      this.setState(State.start());
+
+clearInterval(this.tickId);
+this.tickId = setInterval(this.tick, 1000);
+this.setState(Box_State.start());
     });
     document.querySelector('#playButtonSpan button').replaceWith(newButton);
 
@@ -199,16 +207,23 @@ class Game {
       document.querySelector(".message").textContent = "";
     }
 
-   // pause buton 
+   // pause buton
    
    const newButton1 = document.createElement("button");
     if (status === "ready") {
+
       newButton1.textContent = "Pause";
       newButton1.disabled = true;
     }
     if (status === "playing") {
-      newButton1.textContent = "Pause";
-    newButton1.disabled = false;
+
+if(!this.pause){
+newButton1.textContent = "Pause";
+newButton1.disabled = false;
+}else{
+newButton1.textContent = "Resume";
+}
+   
   }
   if (status === "Pause") {
     newButton1.textContent = "Play";
@@ -217,14 +232,28 @@ class Game {
     if (status === "won") {newButton1.textContent = "Pause";
     newButton1.disabled = true;
   }
-    
+   
     newButton1.addEventListener("click", () => {
-      this.pause = !this.pause;
+     
+ this.pause = !this.pause;
+ 
+ if(this.pause){
+newButton1.textContent = "Resume";
+
+ }else{
+newButton1.textContent = "Pause";
+ }  
+ 
       console.log('pause vlue: ', this.pause);
+ 
     });
     document.querySelector('#pauseButtonSpan button').replaceWith(newButton1);
 
   }
+ 
+  }
+ 
 }
 
 const GAME = Game.ready();
+
