@@ -204,6 +204,14 @@
       dfa.pushLine(text);
     };
 
+    // listen for commands from the Dashboard
+    window.addEventListener("message", receiver, false);
+    function receiver(e) {
+      if (e.origin == "http://localhost:3000") {
+        pushLine(e.data);
+      }
+    }
+
     // game board input
     $(document).ready(function() {
       $('#dfa-submit').on('click', function() {
