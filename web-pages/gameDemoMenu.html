@@ -12,8 +12,6 @@
             <br><br>
             <a href="8PuzzleMenu.html" class="link-btn">8 Puzzle</a>
             <br><br>
-            <a href="../index.html" class="link-btn">Exit</a>
-            <br><br>
             <p>
               <label for="dfa-input">Simulated Voice Input</label>
               <input type="text" id="dfa-input" size="50" />
@@ -37,7 +35,6 @@
           "transitions": {
             "simon": 2,
             "puzzle": 3,
-            "exit": 4,
             "cancel": 0
           }
         },
@@ -53,13 +50,6 @@
           "set": {
             "key": "select",
             "value": "puzzle"
-          }
-        },
-        "4": {
-          "state": "done",
-          "set": {
-            "key": "select",
-            "value": "exit"
           }
         }
       }
@@ -91,10 +81,6 @@
               break
             case "puzzle":
               location.href = '8PuzzleMenu.html'
-              break
-            case "exit":
-              // This needs to revert back to the Dashboard
-              location.href = '../index.html'
               break
             default:
                 onError("Observer did not pick a valid command")
