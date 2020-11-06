@@ -20,128 +20,7 @@
         Note: you can use the Inspector <strong>(CTRL + SHIFT + I)</strong> to view more logging.
       </p>
   
-      <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-      <script type="text/javascript" src="../dfa-observer.js"></script>
-      <script type="text/javascript">
-        let schema = {
-          "0": {
-            "transitions": {
-              "move": 6,
-              "pause": 7,
-              "reset": 8,
-              "*": 1
-            },
-            "state": "restart"
-          },
-          "6": {
-            "transitions": {
-              "*": 1
-            }
-          },
-          "7": {
-            "set": {
-              "key": "pause",
-              "value": "true"
-            },
-            "state": "done"
-          },
-          "8": {
-            "set": {
-              "key": "reset",
-              "value": "true"
-            },
-            "state": "done"
-          },
-          "1": {
-            "transitions": {
-              "up": 2,
-              "down": 3,
-              "left": 4,
-              "right": 5
-            },
-            "save": "number"
-          },
-          "2": {
-            "state": "done",
-            "set": {
-              "key": "direction",
-              "value": "up"
-            }
-          },
-          "3": {
-            "state": "done",
-            "set": {
-              "key": "direction",
-              "value": "down"
-            }
-          },
-          "4": {
-            "state": "done",
-            "set": {
-              "key": "direction",
-              "value": "left"
-            }
-          },
-          "5": {
-            "state": "done",
-            "set": {
-              "key": "direction",
-              "value": "right"
-            }
-          }
-        }
-  
-        function onError(error) {
-          console.error(error);
-          $('#dfa-output-info').val(error);
-          $('#dfa-output-info').css('color', '#CC0000');
-        }
-  
-        function onChangedState(msg) {
-          $('#dfa-output-info').val(msg);
-          $('#dfa-output-info').css('color', '#000000');
-        }
-  
-        function onTerminalState(register) {
-          console.log('!!! on terminal state !!!');
-          for(const [key, value] of register.entries())
-            console.log(`!!!!!!!!!! ${key} = ${value}`);
-  
-          if(!register.has("number")) {
-            if(register.has("reset")) {
-              $('#dfa-output-info').val(`Reset!`);
-              $('#dfa-output-info').css('color', '#0000CC');
-            } else if(register.has("pause")) {
-              $('#dfa-output-info').val(`Paused!`);
-              $('#dfa-output-info').css('color', '#0000CC');
-            } else console.error(`[OBSERVER] Could not pick out the number.`);
-          } else if(!register.has("direction"))
-            console.error(`[OBSERVER] Could not pick out the direction.`);
-          else {
-            $('#dfa-output-info').val(`Moved ${register.get('number')} ${register.get('direction')}!`);
-            $(".grid>button");
-            $('#dfa-output-info').css('color', '#00CC00');
-          }
-        };
-  
-        let dfa = new DFA(schema, onChangedState, onTerminalState, onError);
-  
-        let pushLine = function() {
-          dfa.pushLine($('#dfa-input').val());
-          $('#dfa-input').val('');
-          $('#dfa-input').focus();
-        };
-  
-        $(document).ready(function() {
-          $('#dfa-submit').on('click', pushLine);
-          $('#dfa-input').on('keydown', function(e) {
-            if(e.which == 13) {
-              pushLine();
-              return false;
-            }
-          });
-        });
-      </script>
+
     </div>
     <div class="game">
       <div class="grid">
@@ -160,7 +39,7 @@
         
         <span id="move">Move: 100</span>
         <span id="time">Time: 100</span>
-        <span id= "playButtonSpan"> <button id= "playButton"> Play </button> </span>
+        <span id= "playButtonSpan"> <button id="playButton"> Play </button> </span>
         <span id= "pauseButtonSpan"> <button id="pauseButton"> Pause </button> </span>
       </div>
     </div>
@@ -169,6 +48,170 @@
     
 
 
-    <script src="../8Puzzle.js"></script>
+    <script src="8Puzzle.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../dfa-observer.js"></script>
+    <script type="text/javascript">
+      let schema = {
+        "0": {
+          "transitions": {
+            "move": 6,
+            "pause": 7,
+            "reset": 8,
+            "start": 9,
+            "resume": 10,
+            "*": 1
+          },
+          "state": "restart"
+        },
+        "6": {
+          "transitions": {
+            "*": 1
+          }
+        },
+        "7": {
+          "set": {
+            "key": "pause",
+            "value": "true"
+          },
+          "state": "done"
+        },
+        "8": {
+          "set": {
+            "key": "reset",
+            "value": "true"
+          },
+          "state": "done"
+        },
+        "9": {
+          "set": {
+            "key": "start",
+            "value": "true"
+          },
+          "state": "done"
+        },
+        "10": {
+          "set": {
+            "key": "resume",
+            "value": "true"
+          },
+          "state": "done"
+        },
+        "1": {
+          "transitions": {
+            "up": 2,
+            "down": 3,
+            "left": 4,
+            "right": 5
+          },
+          "save": "number"
+        },
+        "2": {
+          "state": "done",
+          "set": {
+            "key": "direction",
+            "value": "up"
+          }
+        },
+        "3": {
+          "state": "done",
+          "set": {
+            "key": "direction",
+            "value": "down"
+          }
+        },
+        "4": {
+          "state": "done",
+          "set": {
+            "key": "direction",
+            "value": "left"
+          }
+        },
+        "5": {
+          "state": "done",
+          "set": {
+            "key": "direction",
+            "value": "right"
+          }
+        }
+      }
+
+      function onError(error) {
+        console.error(error);
+        $('#dfa-output-info').val(error);
+        $('#dfa-output-info').css('color', '#CC0000');
+      }
+
+      function onChangedState(msg) {
+        $('#dfa-output-info').val(msg);
+        $('#dfa-output-info').css('color', '#000000');
+      }
+
+      function onTerminalState(register) {
+        console.log('!!! on terminal state !!!');
+        for(const [key, value] of register.entries())
+          console.log(`!!!!!!!!!! ${key} = ${value}`);
+
+        if(!register.has("number")) {
+          if(register.has("reset")) {
+            $('#dfa-output-info').val(`Reset!`);
+            $('#dfa-output-info').css('color', '#0000CC');
+            $('#playButtonSpan > button').click();
+          } else if(register.has("pause")) {
+            $('#dfa-output-info').val(`Paused!`);
+            $('#dfa-output-info').css('color', '#0000CC');
+            $('#pauseButtonSpan > button').click(); 
+          } else if(register.has("start")) {
+            $('#dfa-output-info').val(`Playing!`);
+            $('#dfa-output-info').css('color', '#0000CC');
+            $('#playButtonSpan > button').click();
+            console.log('play trial');
+
+          } else if(register.has("resume")) {
+            $('#dfa-output-info').val(`Resumed!`);
+            $('#dfa-output-info').css('color', '#0000CC');
+            $('#pauseButtonSpan > button').click();
+          } else console.error(`[OBSERVER] Could not pick out the number.`);
+        } else if(!register.has("direction"))
+          console.error(`[OBSERVER] Could not pick out the direction.`);
+        else {
+          $('#dfa-output-info').val(`Moved ${register.get('number')} ${register.get('direction')}!`);
+          // $(".grid>button");
+          /*if (register.has("number")){
+            
+          }; */
+          $('#dfa-output-info').css('color', '#00CC00');
+          console.log(`.option-${register.get('number')}`);
+          $(`.option-${register.get('number')}`).click();
+        }
+      };
+
+      let dfa = new DFA(schema, onChangedState, onTerminalState, onError);
+
+      let pushLine = function() {
+        dfa.pushLine($('#dfa-input').val());
+        $('#dfa-input').val('');
+        $('#dfa-input').focus();
+      };
+
+      //Listen for commands from the dashboard
+    window.addEventListener("message", receiver, false);
+    function receiver(e) {
+      if (e.origin == "http://localhost:3000") {
+        pushLine(e.data);
+      }
+      }
+
+      $(document).ready(function() {
+        $('#dfa-submit').on('click', pushLine);
+        $('#dfa-input').on('keydown', function(e) {
+          if(e.which == 13) {
+            pushLine();
+            return false;
+          }
+        });
+      });
+    </script>
   </body>
 </html>
