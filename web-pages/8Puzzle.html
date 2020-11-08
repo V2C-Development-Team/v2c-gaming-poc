@@ -61,6 +61,7 @@
             "reset": 8,
             "start": 9,
             "resume": 10,
+            'exit': 11,
             "*": 1
           },
           "state": "restart"
@@ -94,6 +95,13 @@
         "10": {
           "set": {
             "key": "resume",
+            "value": "true"
+          },
+          "state": "done"
+        },
+        "11": {
+          "set": {
+            "key": "exit",
             "value": "true"
           },
           "state": "done"
@@ -148,6 +156,12 @@
         $('#dfa-output-info').css('color', '#000000');
       }
 
+      // function onTerminalState(register) {
+      //   console.log('!!! on terminal state !!!');
+      //   for(const [key, value] of register.entries())
+      //     console.log(`!!!!!!!!!! ${key} = ${value}`);
+
+
       function onTerminalState(register) {
         console.log('!!! on terminal state !!!');
         for(const [key, value] of register.entries())
@@ -167,11 +181,12 @@
             $('#dfa-output-info').css('color', '#0000CC');
             $('#playButtonSpan > button').click();
             console.log('play trial');
-
           } else if(register.has("resume")) {
             $('#dfa-output-info').val(`Resumed!`);
             $('#dfa-output-info').css('color', '#0000CC');
             $('#pauseButtonSpan > button').click();
+          } else if(register.has("exit")) {
+            location.href = '8PuzzleMenu.html'
           } else console.error(`[OBSERVER] Could not pick out the number.`);
         } else if(!register.has("direction"))
           console.error(`[OBSERVER] Could not pick out the direction.`);
@@ -189,25 +204,29 @@
 
       let dfa = new DFA(schema, onChangedState, onTerminalState, onError);
 
-      let pushLine = function() {
-        dfa.pushLine($('#dfa-input').val());
-        $('#dfa-input').val('');
-        $('#dfa-input').focus();
-      };
+      // let pushLine = function() {
+      //     dfa.pushLine($('#dfa-input').val());
+      //     $('#dfa-input').val('');
+      //     $('#dfa-input').focus();
+      //   };
+
+        let pushLine = function(text) {
+          dfa.pushLine(text);
+        };
 
       //Listen for commands from the dashboard
-    window.addEventListener("message", receiver, false);
-    function receiver(e) {
-      if (e.origin == "http://localhost:3000") {
-        pushLine(e.data);
-      }
+      window.addEventListener("message", receiver, false);
+      function receiver(e) {
+        if (e.origin == "http://localhost:3000") {
+          pushLine(e.data);
+        }
       }
 
       $(document).ready(function() {
-        $('#dfa-submit').on('click', pushLine);
+        $('#dfa-submit').on('click', pushLine($('#dfa-input').val()));
         $('#dfa-input').on('keydown', function(e) {
           if(e.which == 13) {
-            pushLine();
+            pushLine($('#dfa-input').val());
             return false;
           }
         });
