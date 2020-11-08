@@ -32,10 +32,6 @@
       <input type="text" id="dfa-input" size="50" />
       <button id="dfa-submit">Send</button>
     </p>
-    <!-- <p>
-      <label for="dfa-output-info">Additional Information</label>
-      <input type="text" id="dfa-output-info" disabled size="50" />
-    </p> -->
   </div>
 
   <!-- Win Screen -->
@@ -48,10 +44,6 @@
       <input type="text" id="dfa-win-input" size="50" />
       <button id="dfa-win-submit">Send</button>
     </p>
-    <!-- <p class="text-input">
-      <label for="dfa-output-info">Additional Information</label>
-      <input type="text" id="dfa-output-info" disabled size="50" />
-    </p> -->
   </div>
 
   <!-- Loss Screen -->
@@ -64,10 +56,6 @@
       <input type="text" id="dfa-loss-input" size="50" />
       <button id="dfa-loss-submit">Send</button>
     </p>
-    <!-- <p class="text-input">
-      <label for="dfa-output-info">Additional Information</label>
-      <input type="text" id="dfa-output-info" disabled size="50" />
-    </p> -->
   </div>
 
   <!-- DFA -->
@@ -79,7 +67,11 @@
     let schema = {
       "0": {
         "transitions": {
-          "select": 1
+          "select": 1,
+          "red": 3,
+          "green": 4,
+          "yellow": 5,
+          "blue": 6
         },
         "state": "restart"
       },
@@ -211,6 +203,14 @@
     let pushLine = function(text) {
       dfa.pushLine(text);
     };
+
+    // listen for commands from the Dashboard
+    window.addEventListener("message", receiver, false);
+    function receiver(e) {
+      if (e.origin == "http://localhost:3000") {
+        pushLine(e.data);
+      }
+    }
 
     // game board input
     $(document).ready(function() {

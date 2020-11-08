@@ -19,10 +19,6 @@
               <input type="text" id="dfa-input" size="50" />
               <button id="dfa-submit">Send</button>
             </p>
-            <!-- <p>
-              <label for="dfa-output-info">Additional Information</label>
-              <input type="text" id="dfa-output-info" disabled size="50" />
-            </p> -->
         </div>
     </div>
 
@@ -107,17 +103,29 @@
 
       let dfa = new DFA(schema, onChangedState, onTerminalState, onError);
 
-      let pushLine = function() {
-        dfa.pushLine($('#dfa-input').val());
-        $('#dfa-input').val('');
-        $('#dfa-input').focus();
+      let pushLine = function(text) {
+        dfa.pushLine(text);
       };
 
+      // listen for commands from the Dashboard
+      window.addEventListener("message", receiver, false);
+      function receiver(e) {
+        if (e.origin == "http://localhost:3000") {
+          pushLine(e.data);
+        }
+      }
+
       $(document).ready(function() {
-        $('#dfa-submit').on('click', pushLine);
+        $('#dfa-submit').on('click', function() {
+          pushLine($('#dfa-input').val());
+          $('#dfa-input').val('');
+          $('#dfa-input').focus();
+        });
         $('#dfa-input').on('keydown', function(e) {
           if(e.which == 13) {
-            pushLine();
+            pushLine($('#dfa-input').val());
+            $('#dfa-input').val('');
+            $('#dfa-input').focus();
             return false;
           }
         });
