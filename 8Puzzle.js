@@ -122,6 +122,7 @@ class Game {
   }
   setState(newState) {
     this.state = { ...this.state, ...newState };
+    
     this.render();
   }
 
@@ -159,8 +160,10 @@ class Game {
   render() {
 
     const { grid, move, time, status, pause} = this.state;
-if(!this.pause){  
+    if(!this.pause){  
+
     // Render grid
+
     const newGrid = document.createElement("div");
     newGrid.className = "grid";
 
@@ -173,12 +176,14 @@ if(!this.pause){
           button.addEventListener("click", this.handleClickBox(new Box(j, i)));
         }
 
+        button.classList.add(`option-${grid[i][j].toString()}`);
         button.textContent = grid[i][j] === 0 ? "" : grid[i][j].toString();
         newGrid.appendChild(button);
       }
     }
 
     document.querySelector(".grid").replaceWith(newGrid);
+    
 
     // Render button
     const newButton = document.createElement("button");
